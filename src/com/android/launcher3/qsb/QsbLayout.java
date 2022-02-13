@@ -56,6 +56,12 @@ public class QsbLayout extends FrameLayout implements
                 Intent.FLAG_ACTIVITY_CLEAR_TASK).setPackage(searchPackage));
         });
 
+        mGoogleIcon.setOnClickListener(view -> {
+            Intent intent = mContext.getPackageManager().getLaunchIntentForPackage(Utilities.GSA_PACKAGE);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            mContext.startActivity(intent);
+        });
+
         if (Utilities.isGSAEnabled(mContext)) {
             enableLensIcon();
         }

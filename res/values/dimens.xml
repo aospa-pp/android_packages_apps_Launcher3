@@ -34,7 +34,6 @@
 
     <dimen name="dynamic_grid_hotseat_side_padding">0dp</dimen>
 
-    <dimen name="qsb_g_icon_marginStart">16dp</dimen>
     <dimen name="qsb_lens_padding">8dp</dimen>
     <dimen name="qsb_min_width_with_mic">124dp</dimen>
     <dimen name="qsb_shadow_margin">6dp</dimen>
