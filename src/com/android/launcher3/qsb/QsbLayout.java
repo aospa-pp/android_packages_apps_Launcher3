@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.PaintDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -29,6 +32,7 @@ public class QsbLayout extends FrameLayout implements
     ImageView mGoogleIcon;
     ImageView mLensIcon;
     Context mContext;
+    private FrameLayout mInner;
 
     public QsbLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -46,7 +50,10 @@ public class QsbLayout extends FrameLayout implements
         mAssistantIcon = findViewById(R.id.mic_icon);
         mGoogleIcon = findViewById(R.id.g_icon);
         mLensIcon = findViewById(R.id.lens_icon);
+        mInner = findViewById(R.id.inner);
         setIcons();
+        setUpBackground();
+        clipIconRipples();
 
         LauncherPrefs.getPrefs(mContext).registerOnSharedPreferenceChangeListener(this);
 
@@ -69,13 +76,14 @@ public class QsbLayout extends FrameLayout implements
         DeviceProfile dp = ActivityContext.lookupContext(mContext).getDeviceProfile();
         int cellWidth = DeviceProfile.calculateCellWidth(requestedWidth, dp.cellLayoutBorderSpacePx.x, dp.numShownHotseatIcons);
         int iconSize = (int)(Math.round((dp.iconSizePx * 0.92f)));
-        int width = requestedWidth - (cellWidth - iconSize);
+        int widthReduction = cellWidth - iconSize;
+        int width = requestedWidth - widthReduction;
         setMeasuredDimension(width, height);
 
         for (int i = 0; i < getChildCount(); i++) {
             final View child = getChildAt(i);
             if (child != null) {
-                measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
+                measureChildWithMargins(child, widthMeasureSpec, widthReduction, heightMeasureSpec, 0);
             }
         }
     }
@@ -84,6 +92,7 @@ public class QsbLayout extends FrameLayout implements
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
         if (key.equals(Themes.KEY_THEMED_ICONS)) {
             setIcons();
+            setUpBackground();
         }
     }
 
@@ -115,4 +124,32 @@ public class QsbLayout extends FrameLayout implements
         });
     }
 
+    private float getCornerRadius() {
+        Resources res = mContext.getResources();
+        float qsbWidgetHeight = res.getDimension(R.dimen.qsb_widget_height);
+        float qsbWidgetPadding = res.getDimension(R.dimen.qsb_widget_vertical_padding);
+        float innerHeight = qsbWidgetHeight - 2 * qsbWidgetPadding;
+        return innerHeight / 2;
+    }
+
+    private void clipIconRipples() {
+        float cornerRadius = getCornerRadius();
+        PaintDrawable pd = new PaintDrawable(Color.TRANSPARENT);
+        pd.setCornerRadius(cornerRadius);
+        mAssistantIcon.setClipToOutline(cornerRadius > 0);
+        mAssistantIcon.setBackground(pd);
+        mLensIcon.setClipToOutline(cornerRadius > 0);
+        mLensIcon.setBackground(pd);
+    }
+
+    private void setUpBackground() {
+        float cornerRadius = getCornerRadius();
+        int color = Themes.getAttrColor(mContext, R.attr.qsbFillColor);
+        if (Themes.isThemedIconEnabled(mContext))
+             color = Themes.getAttrColor(mContext, R.attr.qsbFillColorThemed);
+        PaintDrawable pd = new PaintDrawable(color);
+        pd.setCornerRadius(cornerRadius);
+        mInner.setClipToOutline(cornerRadius > 0);
+        mInner.setBackground(pd);
+    }
 }
