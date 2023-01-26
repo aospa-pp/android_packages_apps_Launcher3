@@ -197,6 +197,7 @@ public final class Utilities {
     public static final String KEY_FORCE_MONOCHROME_ICONS = "pref_forced_monochrome_icons";
     public static final String KEY_RECENTS_CHIPS = "pref_recents_chips";
     public static final String KEY_AUTO_KEYABORD = "pref_auto_keyboard";
+    public static final String KEY_DOCK_MUSIC_SEARCH = "pref_dock_music_search";
     public static final String KEY_SMARTSPACE = "pref_smartspace";
 
     /**
@@ -1029,6 +1030,11 @@ public final class Utilities {
     public static boolean enableAutoIme(Context context) {
         SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
         return prefs.getBoolean(KEY_AUTO_KEYABORD, false);
+    }
+
+    public static boolean isMusicSearchEnabled(Context context) {
+        SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
+        return prefs.getBoolean(KEY_DOCK_MUSIC_SEARCH, true);
     }
 
     public static boolean showSmartspace(Context context) {
