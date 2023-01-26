@@ -21,6 +21,7 @@ import static androidx.core.view.accessibility.AccessibilityNodeInfoCompat.ACTIO
 import static com.android.launcher3.config.FeatureFlags.IS_STUDIO_BUILD;
 
 import static com.android.launcher3.Utilities.KEY_DOCK_SEARCH;
+import static com.android.launcher3.Utilities.KEY_DOCK_MUSIC_SEARCH;
 import static com.android.launcher3.Utilities.KEY_DT_GESTURE;
 import static com.android.launcher3.Utilities.KEY_SMARTSPACE;
 import static com.android.launcher3.states.RotationHelper.ALLOW_ROTATION_PREFERENCE_KEY;
@@ -156,6 +157,7 @@ public class SettingsActivity extends CollapsingToolbarBaseActivity
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
             case KEY_DOCK_SEARCH:
+            case KEY_DOCK_MUSIC_SEARCH:
             case KEY_SMARTSPACE:
                 LauncherAppState.getInstanceNoCreate().setNeedsRestart();
                 break;

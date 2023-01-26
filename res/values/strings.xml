@@ -38,6 +38,10 @@
     <!-- User visible name for the launcher/home screen. [CHAR_LIMIT=30] -->
     <string name="home_screen">Home</string>
 
+    <!-- Music search -->
+    <string name="dock_music_search_title">Music search</string>
+    <string name="dock_music_search_summary">Start music search on pressing mic icon</string>
+
     <!-- Options for recent tasks -->
     <!-- Title for an option to enter split screen mode for a given app -->
     <string name="recent_task_option_split_screen">Split screen</string>
