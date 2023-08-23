@@ -95,6 +95,7 @@ public class SettingsActivity extends CollapsingToolbarBaseActivity
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
     public static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
+    private static final String KEY_RECENTS_CHIPS = "pref_recents_chips";
     private static final String KEY_SUGGESTIONS = "pref_suggestions";
 
     @VisibleForTesting
@@ -158,6 +159,7 @@ public class SettingsActivity extends CollapsingToolbarBaseActivity
         switch (key) {
             case KEY_DOCK_SEARCH:
             case KEY_DOCK_MUSIC_SEARCH:
+            case KEY_RECENTS_CHIPS:
             case KEY_SMARTSPACE:
                 LauncherAppState.getInstanceNoCreate().setNeedsRestart();
                 break;
