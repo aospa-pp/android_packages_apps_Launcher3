@@ -203,6 +203,7 @@ public class PackageUpdatedTask implements ModelUpdateTask {
                 flagOp = FlagOp.NO_OP.setFlag(
                         WorkspaceItemInfo.FLAG_DISABLED_QUIET_USER, isUserQuiet);
                 appsList.updateDisabledFlags(matcher, flagOp);
+                appsList.setFlags(FLAG_HAS_MULTIPLE_PROFILES, ums.hasMultipleProfiles());
 
                 if (Flags.enablePrivateSpace()) {
                     UserCache userCache = UserCache.INSTANCE.get(context);
