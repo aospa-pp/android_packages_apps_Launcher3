@@ -69,7 +69,7 @@ public class WorkspaceTouchListener extends GestureDetector.SimpleOnGestureListe
     private static final int STATE_PENDING_PARENT_INFORM = 2;
     private static final int STATE_COMPLETED = 3;
 
-    private static final String SLEEP_GESTURE = "pref_sleep_gesture";
+    private static final String SLEEP_GESTURE = "double_tap_sleep_gesture";
 
     private final Rect mTempRect = new Rect();
     private final Launcher mLauncher;

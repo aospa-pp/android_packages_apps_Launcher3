@@ -41,8 +41,8 @@
             launcher:logIdOff="614"
             launcher:iconSpaceReserved="false" />
 
-        <SwitchPreferenceCompat
-            android:key="pref_sleep_gesture"
+        <co.aospa.framework.preference.SecureSettingSwitchPreference
+            android:key="double_tap_sleep_gesture"
             android:title="@string/pref_sleep_gesture_title"
             android:summary="@string/pref_sleep_gesture_summary"
             android:defaultValue="true"
