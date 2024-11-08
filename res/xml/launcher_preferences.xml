@@ -40,8 +40,8 @@
         android:summaryOn="@string/settings_lock_layout_summary_on"
         android:summaryOff="@string/settings_lock_layout_summary_off" />
 
-    <SwitchPreference
-        android:key="pref_dt_gesture"
+    <co.aospa.framework.preference.SecureSettingSwitchPreference
+        android:key="double_tap_sleep_gesture"
         android:title="@string/pref_dt_gesture_title"
         android:summary="@string/pref_dt_gesture_summary"
         android:defaultValue="true"

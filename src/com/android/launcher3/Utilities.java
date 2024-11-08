@@ -142,7 +142,7 @@ public final class Utilities {
      */
     public static final int EDGE_NAV_BAR = 1 << 8;
 
-    public static final String KEY_DT_GESTURE = "pref_dt_gesture";
+    public static final String KEY_DT_GESTURE = "double_tap_sleep_gesture";
 
     /**
      * Indicates if the device has a debug build. Should only be used to store additional info or
