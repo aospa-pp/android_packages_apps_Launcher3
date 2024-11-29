@@ -2043,6 +2043,8 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
         requestLayout();
         // Reapply the current page to update page scrolls.
         setCurrentPage(mCurrentPage);
+
+        mMemInfoView.setVisibility(isInLandscape?View.GONE:View.VISIBLE);
     }
 
     private void onOrientationChanged() {

@@ -898,6 +898,10 @@ public final class Utilities {
     }
 
     public static boolean isShowMeminfo(Context context) {
+        ActivityContext activity = ActivityContext.lookupContext(context);
+        if (activity.getDeviceProfile().isLandscape)
+            return false;
+
         SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
         return prefs.getBoolean(KEY_RECENTS_MEMINFO, false);
    }
