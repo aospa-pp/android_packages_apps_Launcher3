@@ -102,6 +102,13 @@ public final class Utilities {
     public static final String[] EMPTY_STRING_ARRAY = new String[0];
     public static final Person[] EMPTY_PERSON_ARRAY = new Person[0];
 
+    /**
+     * Temporary fixed slot on the first workspace page for the upcoming companion widget app.
+     */
+    public static boolean firstPagePinnedItemEnabled() {
+        return true;
+    }
+
     @ChecksSdkIntAtLeast(api = VERSION_CODES.TIRAMISU, codename = "T")
     public static final boolean ATLEAST_T = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
 

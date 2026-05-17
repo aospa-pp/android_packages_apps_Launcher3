@@ -85,4 +85,8 @@
 
     <!-- Widget categories -->
 
+    <!-- Hotseat QSB -->
+    <string name="first_page_pinned_item_title">At a Glance</string>
+    <string name="first_page_pinned_item_subtitle">Companion widget will appear here</string>
+
 </resources>
