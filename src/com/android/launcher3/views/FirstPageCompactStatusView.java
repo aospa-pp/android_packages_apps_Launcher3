@@ -17,6 +17,7 @@
 package com.android.launcher3.views;
 
 import android.app.AlarmManager;
+import android.provider.AlarmClock;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -141,6 +142,9 @@ public class FirstPageCompactStatusView extends FrameLayout {
         mWeatherContainer.setOnClickListener(v -> openWeather());
         mWeatherContainer.setClickable(true);
         mWeatherContainer.setFocusable(true);
+        mAlarmContainer.setOnClickListener(v -> openAlarms());
+        mAlarmContainer.setClickable(true);
+        mAlarmContainer.setFocusable(true);
         mSecondaryRow.setMinimumHeight(mSecondaryRowPlaceholderHeight);
     }
 
@@ -292,6 +296,10 @@ public class FirstPageCompactStatusView extends FrameLayout {
         if (fallbackIntent != null) {
             launchIntent(mWeatherContainer, fallbackIntent);
         }
+    }
+
+    private void openAlarms() {
+        launchIntent(mAlarmContainer, new Intent(AlarmClock.ACTION_SHOW_ALARMS));
     }
 
     private void launchIntent(View source, Intent intent) {
