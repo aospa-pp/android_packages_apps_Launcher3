@@ -70,6 +70,8 @@ public abstract class SystemShortcut<T extends ActivityContext> extends ItemInfo
         implements View.OnClickListener {
     private static final String TAG = "SystemShortcut";
 
+    private static final String EDGE_LAUNCHER_PACKAGE = "com.android.edge.bar";
+
     private final int mIconResId;
     protected final int mLabelResId;
     protected int mAccessibilityActionId;
@@ -609,6 +611,39 @@ public abstract class SystemShortcut<T extends ActivityContext> extends ItemInfo
             }
         }
     }
+
+    /** Shortcut to open an app in an Edge Launcher freeform window. */
+    public static class FreeformShortcut<T extends ActivityContext> extends SystemShortcut<T> {
+
+        public FreeformShortcut(T target, ItemInfo itemInfo, View originalView) {
+            super(R.drawable.ic_freeform_button, R.string.freeform, target,
+                    itemInfo, originalView);
+        }
+
+        @Override
+        public void onClick(View view) {
+            dismissTaskMenuView();
+            String packageName = mItemInfo.getTargetPackage();
+            if (packageName == null || EDGE_LAUNCHER_PACKAGE.equals(packageName)) {
+                Log.w(TAG, "unable to freeform, unsupported item: " + mItemInfo);
+                return;
+            }
+            android.app.FreeformLauncher.launch(packageName);
+        }
+    }
+
+    public static final Factory<ActivityContext> FREEFORM =
+            (activity, itemInfo, originalView) -> {
+                // Only offer the freeform for launchable app icons.
+                if (itemInfo.itemType != LauncherSettings.Favorites.ITEM_TYPE_APPLICATION) {
+                    return null;
+                }
+                String packageName = itemInfo.getTargetPackage();
+                if (packageName == null || EDGE_LAUNCHER_PACKAGE.equals(packageName)) {
+                    return null;
+                }
+                return new FreeformShortcut<>(activity, itemInfo, originalView);
+            };
 
     public static final Factory<ActivityContext> APP_LOCK =
             (activity, itemInfo, originalView) -> {
